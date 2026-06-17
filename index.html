@@ -114,6 +114,8 @@
   .bio { max-width: 660px; font-size: 1.06rem; color: var(--ink-soft); }
   .bio p { margin: 0 0 18px; }
   .bio strong { color: var(--ink); font-weight: 500; }
+  .cv-link { display: inline-flex; align-items: center; gap: 0.6em; margin-top: 8px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--forest); border: 1px solid var(--line); border-radius: 2px; padding: 10px 16px; transition: all 0.2s; }
+  .cv-link:hover { border-color: var(--forest); background: var(--stone-raised); color: var(--gold); }
 
   .about-intro { display: grid; grid-template-columns: 1fr 290px; gap: 50px; align-items: start; }
   .portrait { margin: 0; position: relative; }
@@ -290,9 +292,13 @@
         </div>
 
         <div class="bio">
-          <p>Originally from Tempe, Arizona, Dr. Alisky has spent more than twenty-five years in medicine. He completed his undergraduate work at the <strong>University of Arizona</strong> and earned both his MD and PhD at <strong>Saint Louis University</strong>, followed by an internal medicine residency and a geriatric medicine fellowship at the <strong>University of Iowa</strong>.</p>
-          <p>His clinical focus is the care of older adults — particularly the diagnosis and treatment of dementia, and helping patients and families avoid futile, invasive procedures that add little to function or quality of life. He is passionate about advancing dementia treatment and supporting research toward a cure for Alzheimer's and related dementias, alongside an active research interest in neuropharmacology, drug delivery to the central nervous system, and the repurposing of existing medicines.</p>
-          <p>Outside the clinic he hikes, travels, and speaks Russian and Spanish.</p>
+          <p>Originally from Tempe, Arizona, Dr. Alisky has spent more than twenty-five years in medicine. He earned his BS in biochemistry, <em>summa cum laude</em>, at the <strong>University of Arizona</strong>, then completed an MD/PhD at <strong>Saint Louis University</strong> — a PhD in neurobiology (1994) and MD (1996) — followed by an internal medicine residency and a combined geriatrics fellowship and gene-therapy postdoctoral fellowship at the <strong>University of Iowa</strong>.</p>
+          <p>His career has spanned rural critical-access medicine in Wisconsin, Colorado's Program of All-Inclusive Care for the Elderly, a hospitalist and assistant clinical professor post at the University of Colorado Denver, and extensive nursing-home and post-acute practice. Today, at <strong>Bloom Healthcare</strong>, he cares for frail elderly patients in assisted-living and home settings and serves as the group's consultant for memory disorders and dementia-related behaviors, largely through telemedicine.</p>
+          <p>His clinical focus is the care of older adults — particularly dementia, and helping patients and families avoid futile, invasive procedures that add little to function or quality of life. His research interests center on designing new therapeutics, using case reports as a starting point for clinical investigation, and recognizing the vasculitis, steroid-responsive syndromes, and catatonia that can hide behind a dementia diagnosis. Outside the clinic he hikes, travels, and speaks Russian and Spanish.</p>
+          <a class="cv-link" href="Alisky_CV.pdf" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+            Download full CV (PDF)
+          </a>
         </div>
       </div>
 
@@ -306,30 +312,31 @@
       <div class="cred-block">
         <h3>Education &amp; Training</h3>
         <div class="cred-item">
-          <div class="ci-main">Geriatric Medicine Fellowship</div>
-          <div class="ci-sub">University of Iowa Hospitals &amp; Clinics</div>
+          <div class="ci-main">Geriatrics Fellowship + Gene-Therapy Postdoc</div>
+          <div class="ci-sub">University of Iowa</div>
           <div class="ci-year">1999 – 2002</div>
         </div>
         <div class="cred-item">
           <div class="ci-main">Internal Medicine Residency</div>
-          <div class="ci-sub">University of Iowa Hospitals &amp; Clinics</div>
+          <div class="ci-sub">University of Iowa</div>
           <div class="ci-year">1996 – 1999</div>
         </div>
         <div class="cred-item">
-          <div class="ci-main">MD &amp; PhD</div>
+          <div class="ci-main">MD &amp; PhD in Neurobiology</div>
           <div class="ci-sub">Saint Louis University</div>
-          <div class="ci-year">1996</div>
+          <div class="ci-year">PhD 1994 · MD 1996</div>
         </div>
         <div class="cred-item">
-          <div class="ci-main">BS</div>
+          <div class="ci-main">BS, Biochemistry — <em>summa cum laude</em></div>
           <div class="ci-sub">University of Arizona</div>
+          <div class="ci-year">1987</div>
         </div>
       </div>
 
       <div class="cred-block">
         <h3>Board Certification</h3>
-        <div class="cred-item"><div class="ci-main">Geriatric Medicine</div></div>
-        <div class="cred-item"><div class="ci-main">Internal Medicine</div></div>
+        <div class="cred-item"><div class="ci-main">Internal Medicine</div><div class="ci-sub">with Certificate of Added Qualification in Geriatric Medicine</div></div>
+        <div class="cred-item"><div class="ci-main">Licensed in Colorado</div><div class="ci-sub">previously Iowa and Wisconsin</div></div>
 
         <h3 style="margin-top:30px;">Clinical Interests</h3>
         <div class="chips">
@@ -433,7 +440,7 @@
   <section class="wrap panel" id="research" role="tabpanel" aria-labelledby="tab-research">
     <div class="sec-kicker">
       <h2 class="sec">Research &amp; publications</h2>
-      <p class="research-intro">A searchable archive of published articles, reviews, and hypothesis papers in neuropharmacology, gene therapy, dementia, and drug delivery. Search by title, journal, or topic.</p>
+      <p class="research-intro">A searchable archive of more than sixty peer-reviewed papers, reviews, case reports, and hypotheses — spanning gene therapy, neuroscience, dementia, and clinical pharmacology, from 1990 to 2015 — plus a patent in neural gene delivery. Search by title, author, or journal, or filter by decade.</p>
     </div>
 
     <div class="searchbar">
@@ -479,37 +486,42 @@
     });
 
     /* ---------- PUBLICATION DATA ----------
-       Source: PubMed export (Alisky J[au]), 57 records, verified author lists + DOIs.
-       Single source of truth. To add a paper, append an object with the same fields. */
+       Source: Dr. Alisky's CV (63 items incl. 1 patent), 1990-2015.
+       DOIs/PMIDs cross-linked from the PubMed export where available.
+       Single source of truth. To add a paper, append an object. */
     const PUBS = [
+      {"title": "Some patients with advanced malignancies also have reversible catatonia or limbic encephalitis", "authors": "Alisky JM", "journal": "International Journal of Cancer Therapeutics and Oncology", "year": 2015, "pmid": null, "doi": null},
       {"title": "Mirtazapine associated with drug-related thrombocytopenia: a case report", "authors": "Stuhec M, Alisky J, Malesic I", "journal": "Journal of Clinical Psychopharmacology", "year": 2014, "pmid": "25118079", "doi": "10.1097/JCP.0000000000000201"},
+      {"title": "Splenic artery infusion of IL-2 might allow treatment of melanoma and renal cell cancer with less side effects and greater efficacy", "authors": "Alisky JM", "journal": "International Journal of Cancer Therapeutics and Oncology", "year": 2014, "pmid": null, "doi": null},
+      {"title": "Inpatient management of sickle cell disease", "authors": "Hunt S, Alisky JM", "journal": "Hospital Medicine Clinics", "year": 2013, "pmid": null, "doi": null},
       {"title": "Mental status changes postchemoembolization: the role of inflammatory response", "authors": "Wells D, Alisky J, Ray CE Jr", "journal": "Seminars in Interventional Radiology", "year": 2013, "pmid": "24436540", "doi": "10.1055/s-0033-1342965"},
       {"title": "Cerebroventricular clozapine would be a viable treatment modality for clozapine-dependent schizophrenia patients with neutropenia", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2012, "pmid": "22818272", "doi": "10.1016/j.mehy.2012.06.033"},
       {"title": "Direct renal artery injection of cyclophosphamide and corticosteroids could offer a better means for treating transplant rejection and vasculitis", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2011, "pmid": "21044821", "doi": "10.1016/j.mehy.2010.10.018"},
+      {"title": "Stem cell growth as a model of carcinogenesis", "authors": "Poser S, Alisky J, Chung KF, Ebermann D, Ehrhart-Bornstein ME, Bornstein S, Androutsellis-Theotokis A", "journal": "Cancer Stem Cells (book chapter, InTech)", "year": 2011, "pmid": null, "doi": null},
       {"title": "Dutasteride prevents the growth response to testosterone in benign and androgen-sensitive malignant prostate cells", "authors": "Alisky JM, Tang Y, Habermehl GK, Iczkowski KA", "journal": "International Journal of Clinical and Experimental Medicine", "year": 2010, "pmid": "20827322", "doi": null},
       {"title": "Bovine and human-derived passive immunization could help slow a future avian influenza pandemic", "authors": "Alisky J", "journal": "Medical Hypotheses", "year": 2009, "pmid": "18824305", "doi": "10.1016/j.mehy.2008.08.016"},
-      {"title": "Minimally-responsive head injury survivors may have chronic catatonia reversed years after an accident", "authors": "Alisky JM", "journal": "Singapore Medical Journal", "year": 2009, "pmid": "19960172", "doi": null},
+      {"title": "Minimally responsive head injury survivors may have chronic catatonia reversible years after an accident", "authors": "Alisky JM", "journal": "Singapore Medical Journal", "year": 2009, "pmid": null, "doi": null},
       {"title": "Pregnancy outcomes for women with epilepsy and bipolar disorder could be improved with intraventricular or intrathecal medication administration", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2009, "pmid": "19556068", "doi": "10.1016/j.mehy.2009.05.024"},
       {"title": "Coffee as an anti-parkinsonian agent: a case report", "authors": "Alisky J", "journal": "Journal of Alternative and Complementary Medicine", "year": 2008, "pmid": "18925864", "doi": "10.1089/acm.2008.0286"},
       {"title": "Do not overlook polymyalgia rheumatica as a cause for immobility in poorly communicating dementia patients", "authors": "Alisky JM", "journal": "Southern Medical Journal", "year": 2008, "pmid": "19005443", "doi": "10.1097/SMJ.0b013e3181819f48"},
       {"title": "Giant cell arteritis dementia and other steroid-responsive dementia syndromes are a unique opportunity for clinicians and researchers", "authors": "Alisky JM", "journal": "Singapore Medical Journal", "year": 2008, "pmid": "18363015", "doi": null},
       {"title": "Intrathecal corticosteroids might slow Alzheimer's disease progression", "authors": "Alisky JM", "journal": "Neuropsychiatric Disease and Treatment", "year": 2008, "pmid": "19183775", "doi": "10.2147/ndt.s3685"},
-      {"title": "Normal pressure hydrocephalus co-existing with a second dementia disorder", "authors": "Alisky J", "journal": "Neuropsychiatric Disease and Treatment", "year": 2008, "pmid": "18728810", "doi": "10.2147/ndt.s2027"},
-      {"title": "Survival of Naegleria fowleri primary amebic meningocephalitis (PAM) could be improved with an intensive multi-route chemo- and biotherapeutic regimen", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2008, "pmid": "18715722", "doi": "10.1016/j.mehy.2008.06.037"},
-      {"title": "[Immobility in patients with advanced dementia may actually be a form of a Lorazepam-reversible catatonia]", "authors": "Alisky JM", "journal": "Revista Médica de Chile", "year": 2008, "pmid": "19194638", "doi": null},
+      {"title": "La inmovilidad en pacientes con demencia avanzada pudiese ser una forma de catatonia reversible por lorazepam", "authors": "Alisky JM", "journal": "Revista Médica de Chile", "year": 2008, "pmid": null, "doi": null},
+      {"title": "Normal pressure hydrocephalus co-existing with a second dementia disorder", "authors": "Alisky JM", "journal": "Neuropsychiatric Disease and Treatment", "year": 2008, "pmid": "18728810", "doi": "10.2147/ndt.s2027"},
+      {"title": "Survival of Naegleria fowleri primary amebic meningoencephalitis (PAM) could be improved with an intensive multi-route chemo- and biotherapeutic regimen", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2008, "pmid": null, "doi": null},
       {"title": "Doxycycline and rifampin could be useful therapeutic agents for Gaucher disease", "authors": "Alisky JM", "journal": "Molecular Genetics and Metabolism", "year": 2007, "pmid": "16919491", "doi": "10.1016/j.ymgme.2006.06.008"},
       {"title": "Implantable central venous access ports for minimally invasive repetitive drainage of pleural effusions", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2007, "pmid": "17234354", "doi": "10.1016/j.mehy.2006.04.081"},
       {"title": "Lorazepam-reversible catatonia in the elderly can mimic dementia, coma and stroke", "authors": "Alisky JM", "journal": "Age and Ageing", "year": 2007, "pmid": "17255087", "doi": "10.1093/ageing/afl168"},
-      {"title": "Memantine-induced decompensation in a patient with lewy body dementia", "authors": "Alisky JM", "journal": "Annals of the Academy of Medicine, Singapore", "year": 2007, "pmid": "17767347", "doi": null},
+      {"title": "Memantine-induced decompensation in a patient with Lewy body dementia", "authors": "Alisky JM", "journal": "Annals of the Academy of Medicine, Singapore", "year": 2007, "pmid": "17767347", "doi": null},
       {"title": "Nightly high dose lactulose infusion could be a cost-effective treatment for hepatic encephalopathy, renal insufficiency and heart failure", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2007, "pmid": "17467192", "doi": "10.1016/j.mehy.2006.04.082"},
       {"title": "Nogo A protein neutralisation and motor cortex computer implants: a future hope for spinal cord injury", "authors": "Alisky JM", "journal": "Singapore Medical Journal", "year": 2007, "pmid": "17538769", "doi": null},
       {"title": "Phentermine, sibutramine and metformin could be used for the prevention and treatment of steroid-induced weight gain", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2007, "pmid": "17008024", "doi": "10.1016/j.mehy.2006.07.032"},
       {"title": "Restless arm symptoms as an extension of restless leg syndrome", "authors": "Alisky JM", "journal": "Age and Ageing", "year": 2007, "pmid": "17114204", "doi": "10.1093/ageing/afl124"},
       {"title": "Successful treatment of Parkinson disease with memantine", "authors": "Alisky JM", "journal": "Southern Medical Journal", "year": 2007, "pmid": "17591322", "doi": "10.1097/01.smj.0000257615.79559.3d"},
       {"title": "The coming problem of HIV-associated Alzheimer's disease", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2007, "pmid": "17433562", "doi": "10.1016/j.mehy.2007.02.030"},
-      {"title": "Thiazolidinediones could be an effective treatment for HIV-associated progressive multifocal leukoencephalopathy", "authors": "Alisky JM", "journal": "International Journal of Infectious Diseases", "year": 2007, "pmid": "17236800", "doi": "10.1016/j.ijid.2006.09.012"},
+      {"title": "Thiazolidinediones could be an effective treatment for HIV associated progressive multifocal leukoencephalopathy", "authors": "Alisky JM", "journal": "International Journal of Infectious Diseases", "year": 2007, "pmid": "17236800", "doi": "10.1016/j.ijid.2006.09.012"},
       {"title": "A TAT-modified fusion protein efficiently penetrates mouse hypoglossal nuclei from transduced ependyma", "authors": "Alisky JM, Xia H, Davidson BL", "journal": "Neuroscience Letters", "year": 2006, "pmid": "16650576", "doi": "10.1016/j.neulet.2006.03.076"},
-      {"title": "A new approach to Parkinson's disease combining caffeine, methylphenidate, and anticholinergic agents: case histories, pharmacological data, and a conceptual framework from traditional Chinese medicine", "authors": "Alisky JM", "journal": "Hong Kong Medical Journal", "year": 2006, "pmid": "16603789", "doi": null},
+      {"title": "A new approach to Parkinson's disease combining caffeine, methylphenidate, and anticholinergic agents", "authors": "Alisky JM", "journal": "Hong Kong Medical Journal", "year": 2006, "pmid": null, "doi": null},
       {"title": "Can chlorpheniramine cause serotonin syndrome?", "authors": "Alisky JM", "journal": "Singapore Medical Journal", "year": 2006, "pmid": "17075681", "doi": null},
       {"title": "Cholinesterase inhibitors might alleviate methamphetamine-induced delusions, hallucinations and cognitive impairment, while reducing craving and addiction", "authors": "Alisky JM", "journal": "World Journal of Biological Psychiatry", "year": 2006, "pmid": "17071550", "doi": "10.1080/15622970600947030"},
       {"title": "Dexamethasone could improve myocardial infarction outcomes and provide new therapeutic options for non-interventional patients", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2006, "pmid": "16503095", "doi": "10.1016/j.mehy.2005.12.034"},
@@ -517,16 +529,18 @@
       {"title": "Integrated electronic monitoring systems could revolutionize care for patients with cognitive impairment", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2006, "pmid": "16488550", "doi": "10.1016/j.mehy.2005.11.045"},
       {"title": "Neurotransmitter depletion may be a cause of dementia pathology rather than an effect", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2006, "pmid": "16647220", "doi": "10.1016/j.mehy.2006.02.043"},
       {"title": "Could cholinesterase inhibitors and memantine alleviate HIV dementia?", "authors": "Alisky JM", "journal": "Journal of Acquired Immune Deficiency Syndromes", "year": 2005, "pmid": "15608536", "doi": "10.1097/00126334-200501010-00021"},
-      {"title": "Niacin improved rigidity and bradykinesia in a Parkinson's disease patient but also caused unacceptable nightmares and skin rash--a case report", "authors": "Alisky JM", "journal": "Nutritional Neuroscience", "year": 2005, "pmid": "16669604", "doi": "10.1080/10284150500484638"},
+      {"title": "Niacin improved rigidity and bradykinesia in a Parkinson's disease patient but also caused unacceptable nightmares and skin rash: a case report", "authors": "Alisky JM", "journal": "Nutritional Neuroscience", "year": 2005, "pmid": "16669604", "doi": "10.1080/10284150500484638"},
       {"title": "Gene transfer to brain and spinal cord using recombinant adenoviral vectors", "authors": "Alisky JM, Davidson BL", "journal": "Methods in Molecular Biology", "year": 2004, "pmid": "14970587", "doi": "10.1385/1-59259-650-9:91"},
-      {"title": "Is the immobility of advanced dementia a form of lorazepam-responsive catatonia?", "authors": "Alisky JM", "journal": "American Journal of Alzheimer's Disease & Other Dementias", "year": 2004, "pmid": "15359557", "doi": "10.1177/153331750401900404"},
+      {"title": "Is the immobility of advanced dementia a form of lorazepam responsive catatonia?", "authors": "Alisky JM", "journal": "American Journal of Alzheimer's Disease & Other Dementias", "year": 2004, "pmid": "15359557", "doi": "10.1177/153331750401900404"},
       {"title": "Towards therapy using RNA interference", "authors": "Alisky JM, Davidson BL", "journal": "American Journal of Pharmacogenomics", "year": 2004, "pmid": "14987121", "doi": "10.2165/00129785-200404010-00005"},
       {"title": "Xenografts are an achievable breakthrough", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2004, "pmid": "15193356", "doi": "10.1016/j.mehy.2004.01.023"},
       {"title": "A case history illustrating how extended release cholinesterase inhibitors could improve management of Alzheimer's disease", "authors": "Alisky JM", "journal": "Journal of Alzheimer's Disease", "year": 2003, "pmid": "14757938", "doi": "10.3233/jad-2003-5608"},
       {"title": "Ethacrynic acid can be effective for refractory congestive heart failure and ascites", "authors": "Alisky JM, Tuttle TF", "journal": "Southern Medical Journal", "year": 2003, "pmid": "14632366", "doi": "10.1097/01.SMJ.0000082004.40613.D7"},
       {"title": "Priapism induced by proton-pump inhibitors and misoprostol", "authors": "Alisky JM", "journal": "Annals of Internal Medicine", "year": 2003, "pmid": "14530253", "doi": "10.7326/0003-4819-139-7-200310070-00027-w2"},
       {"title": "Transduction of neurons lining the cerebral external capsules in mice with feline immunodeficiency virus based vectors", "authors": "Alisky JM, Hughes SM, Davidson BL", "journal": "Neuroscience Letters", "year": 2003, "pmid": "14583396", "doi": "10.1016/s0304-3940(03)00833-4"},
-      {"title": "Viral-mediated delivery of the late-infantile neuronal ceroid lipofuscinosis gene, TPP-I to the mouse central nervous system", "authors": "Haskell RE, Hughes SM, Chiorini JA, Alisky JM, Davidson BL", "journal": "Gene Therapy", "year": 2003, "pmid": "12525835", "doi": "10.1038/sj.gt.3301843"},
+      {"title": "Viral-mediated delivery of the late-infantile neuronal ceroid lipofuscinosis gene, TPP-I, to the mouse central nervous system", "authors": "Haskell RE, Hughes SM, Chiorini JA, Alisky JM, Davidson BL", "journal": "Gene Therapy", "year": 2003, "pmid": "12525835", "doi": "10.1038/sj.gt.3301843"},
+      {"title": "Methods of transducing neural cells using lentivirus vectors", "authors": "Davidson B, Alisky J, Dubensky T, Hughes S, Jolly D, Sauter S", "journal": "Patent · US 2002/0037281", "year": 2002, "pmid": null, "doi": null, "link": "https://patents.google.com/patent/US20020037281A1"},
+      {"title": "Successful management of polymyalgia rheumatica and giant cell arteritis", "authors": "Alisky JM", "journal": "Family Practice Recertification", "year": 2002, "pmid": null, "doi": null},
       {"title": "Widespread dispersal of cholera toxin subunit b to brain and spinal cord neurons following systemic delivery", "authors": "Alisky JM, van de Wetering CI, Davidson BL", "journal": "Experimental Neurology", "year": 2002, "pmid": "12460616", "doi": "10.1006/exnr.2002.8031"},
       {"title": "Gene therapy for amyotrophic lateral sclerosis and other motor neuron diseases", "authors": "Alisky JM, Davidson BL", "journal": "Human Gene Therapy", "year": 2000, "pmid": "11096437", "doi": "10.1089/104303400750038435"},
       {"title": "Transduction of murine cerebellar neurons with recombinant FIV and AAV5 vectors", "authors": "Alisky JM, Hughes SM, Sauter SL, Jolly D, Dubensky TW Jr, Staber PD, Chiorini JA, Davidson BL", "journal": "NeuroReport", "year": 2000, "pmid": "10976941", "doi": "10.1097/00001756-200008210-00013"},
@@ -566,9 +580,10 @@
     });
 
     function linkFor(p) {
+      if (p.link) return p.link;
       if (p.doi) return `https://doi.org/${p.doi}`;
       if (p.pmid) return `https://pubmed.ncbi.nlm.nih.gov/${p.pmid}/`;
-      return `https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(p.title)}`;
+      return `https://scholar.google.com/scholar?q=${encodeURIComponent(p.title)}`;
     }
 
     function escapeHtml(s) { return s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
