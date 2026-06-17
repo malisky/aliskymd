@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Joseph M. Alisky, MD, PhD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --stone: #e7e6dc;
+    --stone-raised: #f2f1e9;
+    --ink: #20271f;
+    --ink-soft: #4f574a;
+    --ink-faint: #868d7e;
+    --forest: #2c4a36;
+    --forest-deep: #1f3527;
+    --gold: #9a7729;
+    --gold-soft: #b59442;
+    --line: rgba(32, 39, 31, 0.15);
+    --line-soft: rgba(32, 39, 31, 0.08);
+
+    --display: "EB Garamond", Georgia, serif;
+    --body: "IBM Plex Sans", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+
+    --maxw: 1000px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--stone);
+    color: var(--ink);
+    font-family: var(--body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection { background: var(--forest); color: var(--stone); }
+  a { color: var(--forest); text-decoration: none; }
+
+  .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 30px; }
+
+  .label {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* ---- ornamental divider (the one LOTR nod) ---- */
+  .rule { display: flex; align-items: center; gap: 14px; margin: 0; }
+  .rule::before, .rule::after { content: ""; height: 1px; background: var(--gold); opacity: 0.5; flex: 1; }
+  .rule i {
+    width: 7px; height: 7px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    flex: none;
+  }
+
+  /* ---- masthead ---- */
+  .masthead { padding-top: 46px; padding-bottom: 26px; }
+  .name {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(2rem, 5vw, 2.9rem);
+    line-height: 1.05;
+    letter-spacing: 0.005em;
+    margin: 0 0 8px;
+  }
+  .name .creds { color: var(--ink-faint); font-weight: 400; }
+  .subtitle { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--forest); margin: 0 0 22px; }
+
+  /* ---- tabs ---- */
+  .tabs {
+    position: sticky; top: 0; z-index: 30;
+    background: color-mix(in srgb, var(--stone) 88%, transparent);
+    backdrop-filter: saturate(120%) blur(7px);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .tabrow { display: flex; gap: 4px; }
+  .tab {
+    appearance: none; background: none; border: none; cursor: pointer;
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-soft);
+    padding: 17px 20px 15px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab[aria-selected="true"] { color: var(--forest); border-color: var(--gold); }
+  .tab:focus-visible { outline: 2px solid var(--forest); outline-offset: -2px; }
+
+  .panel { display: none; padding-top: 52px; padding-bottom: 80px; }
+  .panel.active { display: block; animation: fade 0.5s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  h2.sec {
+    font-family: var(--display); font-weight: 500;
+    font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: 0.005em;
+    margin: 0 0 6px;
+  }
+  .sec-kicker { margin-bottom: 30px; }
+
+  /* ---- ABOUT ---- */
+  .bio { max-width: 660px; font-size: 1.06rem; color: var(--ink-soft); }
+  .bio p { margin: 0 0 18px; }
+  .bio strong { color: var(--ink); font-weight: 500; }
+
+  .about-intro { display: grid; grid-template-columns: 1fr 290px; gap: 50px; align-items: start; }
+  .portrait { margin: 0; position: relative; }
+  .portrait img { width: 100%; height: auto; display: block; border-radius: 3px; }
+  .portrait::after {
+    content: ""; position: absolute; inset: 8px; border: 1px solid var(--gold); opacity: 0.55;
+    pointer-events: none; border-radius: 2px;
+  }
+  .portrait figcaption { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: var(--ink-faint); margin-top: 12px; text-transform: uppercase; }
+
+  .personal { margin-top: 54px; }
+  .personal-fig { margin: 16px 0 0; }
+  .personal-fig img { width: 100%; height: auto; max-height: 440px; object-fit: cover; object-position: center 42%; display: block; border-radius: 3px; }
+  .personal-fig figcaption { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.06em; color: var(--ink-faint); margin-top: 12px; }
+
+  .creds-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 56px;
+    margin-top: 46px; border-top: 1px solid var(--line);
+  }
+  .cred-block { padding: 30px 0; border-bottom: 1px solid var(--line-soft); }
+  .cred-block h3 { font-family: var(--mono); font-size: 11.5px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 16px; }
+  .cred-item { margin-bottom: 16px; }
+  .cred-item:last-child { margin-bottom: 0; }
+  .cred-item .ci-main { font-family: var(--display); font-size: 1.18rem; }
+  .cred-item .ci-sub { font-size: 0.9rem; color: var(--ink-soft); }
+  .cred-item .ci-year { font-family: var(--mono); font-size: 11px; color: var(--gold); letter-spacing: 0.05em; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip-static {
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.04em;
+    padding: 5px 11px; border: 1px solid var(--line); border-radius: 2px; color: var(--ink-soft);
+  }
+
+  /* ---- PRACTICE ---- */
+  .practice-hero { max-width: 700px; }
+  .practice-hero h2 { font-family: var(--display); font-weight: 500; font-size: clamp(2rem, 4.5vw, 3.1rem); line-height: 1.08; margin: 0 0 20px; }
+  .practice-hero p { font-size: 1.12rem; color: var(--ink-soft); max-width: 560px; margin: 0 0 32px; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 0.7em;
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.12em; text-transform: uppercase;
+    background: var(--forest); color: var(--stone-raised);
+    padding: 14px 24px; border-radius: 2px;
+    transition: background 0.2s;
+  }
+  .cta:hover { background: var(--forest-deep); }
+  .cta .arrow { transition: transform 0.2s; }
+  .cta:hover .arrow { transform: translateX(4px); }
+
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); margin-top: 64px; border: 1px solid var(--line); }
+  .pcard { background: var(--stone-raised); padding: 30px 26px; }
+  .pcard .pnum { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--gold); }
+  .pcard h3 { font-family: var(--display); font-weight: 500; font-size: 1.32rem; margin: 12px 0 10px; line-height: 1.15; }
+  .pcard p { font-size: 0.96rem; color: var(--ink-soft); margin: 0; }
+
+  .practice-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 64px; padding-top: 44px; border-top: 1px solid var(--line); }
+  .practice-detail h3 { font-family: var(--display); font-weight: 500; font-size: 1.4rem; margin: 0 0 14px; }
+  .telemed { display: grid; grid-template-columns: auto 1fr; gap: 22px; align-items: start; margin-top: 56px; padding: 28px 30px; background: var(--stone-raised); border: 1px solid var(--line); border-left: 3px solid var(--gold); }
+  .telemed-icon { color: var(--forest); padding-top: 24px; }
+  .telemed h3 { font-family: var(--display); font-weight: 500; font-size: 1.45rem; margin: 8px 0 10px; }
+  .telemed p { margin: 0; color: var(--ink-soft); max-width: 620px; }
+  .practice-detail ul { margin: 0; padding: 0; list-style: none; }
+  .practice-detail li { padding: 11px 0; border-bottom: 1px solid var(--line-soft); color: var(--ink-soft); display: flex; gap: 12px; }
+  .practice-detail li::before { content: "◆"; color: var(--gold); font-size: 9px; line-height: 1.9; flex: none; }
+  .contact-card { background: var(--stone-raised); border: 1px solid var(--line); padding: 28px; align-self: start; }
+  .contact-card .label { display: block; margin-bottom: 14px; }
+  .contact-card p { margin: 0 0 8px; }
+  .placeholder { color: var(--ink-faint); font-style: italic; }
+
+  /* ---- AFFILIATION ---- */
+  .affiliation { margin-top: 54px; }
+  .affil-card {
+    background: var(--stone-raised);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--gold);
+    padding: 28px 30px; margin-top: 16px; max-width: 720px;
+  }
+  .affil-card h3 { font-family: var(--display); font-weight: 500; font-size: 1.5rem; margin: 0 0 12px; }
+  .affil-card p { color: var(--ink-soft); margin: 0 0 18px; }
+  .affil-link {
+    display: inline-flex; align-items: center; gap: 0.6em;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--forest);
+  }
+  .affil-link .arrow { transition: transform 0.2s; }
+  .affil-link:hover { color: var(--gold); }
+  .affil-link:hover .arrow { transform: translateX(4px); }
+
+  /* ---- RESEARCH ---- */
+  .research-intro { max-width: 620px; color: var(--ink-soft); margin-bottom: 30px; }
+  .searchbar { position: relative; margin-bottom: 18px; }
+  .searchbar input {
+    width: 100%; font-family: var(--body); font-size: 1rem; font-weight: 300; color: var(--ink);
+    background: var(--stone-raised); border: 1px solid var(--line);
+    padding: 14px 16px 14px 42px; border-radius: 3px;
+  }
+  .searchbar input:focus { outline: none; border-color: var(--forest); }
+  .searchbar input::placeholder { color: var(--ink-faint); }
+  .searchbar svg { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); opacity: 0.5; }
+
+  .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 7px; }
+  .fchip {
+    appearance: none; cursor: pointer; font-family: var(--mono); font-size: 11px; letter-spacing: 0.05em;
+    background: none; border: 1px solid var(--line); border-radius: 20px; padding: 5px 13px; color: var(--ink-soft);
+    transition: all 0.18s;
+  }
+  .fchip:hover { border-color: var(--forest); color: var(--forest); }
+  .fchip[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: var(--stone-raised); }
+  .sortwrap { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+  .sortwrap select { font-family: var(--mono); font-size: 11px; background: var(--stone-raised); border: 1px solid var(--line); border-radius: 3px; padding: 6px 8px; color: var(--ink); }
+  .resultcount { font-family: var(--mono); font-size: 11.5px; color: var(--ink-faint); letter-spacing: 0.04em; padding: 14px 0 4px; border-bottom: 1px solid var(--line); }
+
+  .pub { display: grid; grid-template-columns: 64px 1fr auto; gap: 22px; padding: 22px 0; border-bottom: 1px solid var(--line-soft); align-items: baseline; }
+  .pub-year { font-family: var(--mono); font-size: 14px; color: var(--gold); letter-spacing: 0.02em; }
+  .pub-year.na { color: var(--ink-faint); }
+  .pub-title { font-family: var(--display); font-size: 1.22rem; line-height: 1.25; margin: 0 0 6px; color: var(--ink); }
+  .pub-meta { font-size: 0.9rem; color: var(--ink-soft); margin: 0 0 9px; }
+  .pub-meta .journal { font-style: italic; }
+  .pub-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ptag { display: inline-block; font-family: var(--body); font-weight: 400; font-style: italic; font-size: 0.86rem; color: var(--ink-soft); border: 1px solid var(--line-soft); border-radius: 2px; padding: 3px 9px; cursor: pointer; transition: all 0.18s; }
+  .ptag:hover { color: var(--forest); border-color: var(--forest); }
+  .pub-link { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; align-self: center; }
+  .pub-link:hover { color: var(--gold); }
+  .noresults { padding: 40px 0; color: var(--ink-faint); font-style: italic; }
+
+  footer { border-top: 1px solid var(--line); }
+  .foot { padding: 30px 0 50px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.05em; color: var(--ink-faint); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+  @media (max-width: 760px) {
+    .about-intro { grid-template-columns: 1fr; gap: 28px; }
+    .portrait { max-width: 240px; order: -1; }
+  }
+  @media (max-width: 720px) {
+    .wrap { padding: 0 20px; }
+    .creds-grid { grid-template-columns: 1fr; }
+    .pillars { grid-template-columns: 1fr; }
+    .practice-detail { grid-template-columns: 1fr; gap: 36px; }
+    .telemed { grid-template-columns: 1fr; gap: 8px; }
+    .telemed-icon { padding-top: 0; }
+    .tab { padding: 15px 14px 13px; }
+    .pub { grid-template-columns: 1fr; gap: 6px; }
+    .pub-year { order: -1; }
+    .pub-link { justify-self: start; }
+    .sortwrap { margin-left: 0; width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .panel.active { animation: none; }
+    .cta .arrow, .go .arrow { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="wrap masthead">
+    <h1 class="name">Joseph M. Alisky<span class="creds">, MD, PhD</span></h1>
+    <p class="subtitle">Geriatric &amp; Internal Medicine</p>
+    <div class="rule"><i></i></div>
+  </div>
+
+  <div class="tabs">
+    <div class="wrap tabrow" role="tablist" aria-label="Sections">
+      <button class="tab" role="tab" aria-selected="true" id="tab-about" data-panel="about">About</button>
+      <button class="tab" role="tab" aria-selected="false" id="tab-practice" data-panel="practice">Practice</button>
+      <button class="tab" role="tab" aria-selected="false" id="tab-research" data-panel="research">Research</button>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="wrap panel active" id="about" role="tabpanel" aria-labelledby="tab-about">
+    <div class="about-intro">
+      <div class="about-text">
+        <div class="sec-kicker">
+          <h2 class="sec">A physician-scientist's practice</h2>
+          <span class="label">Director, CAD Foundation Scientific Board</span>
+        </div>
+
+        <div class="bio">
+          <p>Originally from Tempe, Arizona, Dr. Alisky has spent more than twenty-five years in medicine. He completed his undergraduate work at the <strong>University of Arizona</strong> and earned both his MD and PhD at <strong>Saint Louis University</strong>, followed by an internal medicine residency and a geriatric medicine fellowship at the <strong>University of Iowa</strong>.</p>
+          <p>His clinical focus is the care of older adults — particularly the diagnosis and treatment of dementia, and helping patients and families avoid futile, invasive procedures that add little to function or quality of life. He is passionate about advancing dementia treatment and supporting research toward a cure for Alzheimer's and related dementias, alongside an active research interest in neuropharmacology, drug delivery to the central nervous system, and the repurposing of existing medicines.</p>
+          <p>Outside the clinic he hikes, travels, and speaks Russian and Spanish.</p>
+        </div>
+      </div>
+
+      <figure class="portrait">
+        <img src="portrait.webp" alt="Portrait of Dr. Joseph M. Alisky" width="600" height="800" />
+        <figcaption>Joseph M. Alisky, MD, PhD</figcaption>
+      </figure>
+    </div>
+
+    <div class="creds-grid">
+      <div class="cred-block">
+        <h3>Education &amp; Training</h3>
+        <div class="cred-item">
+          <div class="ci-main">Geriatric Medicine Fellowship</div>
+          <div class="ci-sub">University of Iowa Hospitals &amp; Clinics</div>
+          <div class="ci-year">1999 – 2002</div>
+        </div>
+        <div class="cred-item">
+          <div class="ci-main">Internal Medicine Residency</div>
+          <div class="ci-sub">University of Iowa Hospitals &amp; Clinics</div>
+          <div class="ci-year">1996 – 1999</div>
+        </div>
+        <div class="cred-item">
+          <div class="ci-main">MD &amp; PhD</div>
+          <div class="ci-sub">Saint Louis University</div>
+          <div class="ci-year">1996</div>
+        </div>
+        <div class="cred-item">
+          <div class="ci-main">BS</div>
+          <div class="ci-sub">University of Arizona</div>
+        </div>
+      </div>
+
+      <div class="cred-block">
+        <h3>Board Certification</h3>
+        <div class="cred-item"><div class="ci-main">Geriatric Medicine</div></div>
+        <div class="cred-item"><div class="ci-main">Internal Medicine</div></div>
+
+        <h3 style="margin-top:30px;">Clinical Interests</h3>
+        <div class="chips">
+          <span class="chip-static">Dementia</span>
+          <span class="chip-static">Cognitive assessment</span>
+          <span class="chip-static">Complex medication review</span>
+          <span class="chip-static">Goals-of-care</span>
+          <span class="chip-static">Frailty</span>
+        </div>
+
+        <h3 style="margin-top:30px;">Languages</h3>
+        <div class="chips">
+          <span class="chip-static">English</span>
+          <span class="chip-static">Russian</span>
+          <span class="chip-static">Spanish</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="affiliation">
+      <div class="rule" style="margin-bottom:28px;"><i></i></div>
+      <span class="label">Affiliation</span>
+      <div class="affil-card">
+        <h3>The Curing Alzheimer's Disease Foundation</h3>
+        <span class="label" style="display:block;margin-bottom:14px;color:var(--gold);">Director, Scientific Board</span>
+        <p>Dr. Alisky directs the scientific board of the Curing Alzheimer's Disease Foundation, a nonprofit advancing Alzheimer's research, prevention, and education. The foundation funds the Alzheimer's Legacy Lab at the University of Minnesota and runs community programs focused on reducing dementia risk.</p>
+        <a class="affil-link" href="https://curingalzheimersdisease.com/" target="_blank" rel="noopener">Visit the foundation <span class="arrow">→</span></a>
+      </div>
+    </div>
+
+    <div class="personal">
+      <div class="rule" style="margin-bottom:28px;"><i></i></div>
+      <span class="label">Off the clock</span>
+      <figure class="personal-fig">
+        <img src="personal-dogwalk.jpeg" alt="Dr. Alisky walking his dog at sunset along the Colorado Front Range" width="1600" height="1200" />
+        <figcaption>An evening walk along the Front Range.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- PRACTICE -->
+  <section class="wrap panel" id="practice" role="tabpanel" aria-labelledby="tab-practice">
+    <div class="practice-hero">
+      <h2>Geriatric care, with the time it deserves.</h2>
+      <p>A small private practice built around longer visits, real continuity, and honest conversations about what treatment can and can't do — especially for older adults living with cognitive change.</p>
+      <a class="cta" href="#contact-block">Request a consultation <span class="arrow">→</span></a>
+    </div>
+
+    <div class="pillars">
+      <div class="pcard">
+        <span class="pnum">01</span>
+        <h3>Unhurried visits</h3>
+        <p>Appointments long enough to understand the whole picture — the medications, the history, and the goals — not just the chief complaint.</p>
+      </div>
+      <div class="pcard">
+        <span class="pnum">02</span>
+        <h3>Memory &amp; cognition</h3>
+        <p>Careful assessment of memory loss and dementia, with treatment plans built around function and quality of life.</p>
+      </div>
+      <div class="pcard">
+        <span class="pnum">03</span>
+        <h3>Fewer futile procedures</h3>
+        <p>A measured approach to testing and intervention, weighing every procedure against what it will actually change.</p>
+      </div>
+    </div>
+
+    <div class="telemed">
+      <div class="telemed-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="13" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <div>
+        <span class="label" style="color:var(--gold);">Telemedicine</span>
+        <h3>Visits from home, when that's easier</h3>
+        <p>For established patients, many appointments — follow-ups, medication reviews, and family check-ins — can be done by secure video. It's often a gentler option for those with mobility or transportation challenges, and lets family join from anywhere.</p>
+      </div>
+    </div>
+
+    <div class="practice-detail">
+      <div>
+        <h3>Who this is for</h3>
+        <ul>
+          <li>Older adults managing several chronic conditions at once</li>
+          <li>Families navigating a new diagnosis of memory loss or dementia</li>
+          <li>Patients on long, complicated medication lists that need review</li>
+          <li>Anyone wanting a second opinion before a major procedure</li>
+        </ul>
+      </div>
+      <div class="contact-card" id="contact-block">
+        <span class="label">Get in touch</span>
+        <p><span class="placeholder">[ Practice name ]</span></p>
+        <p><span class="placeholder">[ Street address ]</span></p>
+        <p><span class="placeholder">[ City, CO ]</span></p>
+        <p style="margin-top:14px;"><span class="placeholder">[ Phone ]</span></p>
+        <p><a href="mailto:placeholder@example.com">[ email ]</a></p>
+        <p style="margin-top:14px;" class="label">By appointment</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section class="wrap panel" id="research" role="tabpanel" aria-labelledby="tab-research">
+    <div class="sec-kicker">
+      <h2 class="sec">Research &amp; publications</h2>
+      <p class="research-intro">A searchable archive of published articles, reviews, and hypothesis papers in neuropharmacology, gene therapy, dementia, and drug delivery. Search by title, journal, or topic.</p>
+    </div>
+
+    <div class="searchbar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+      <input type="search" id="q" placeholder="Search publications — e.g. memantine, dementia, gene therapy…" aria-label="Search publications" />
+    </div>
+
+    <div class="controls">
+      <div class="filters" id="filters" role="group" aria-label="Filter by type"></div>
+      <div class="sortwrap">
+        <span class="label">Sort</span>
+        <select id="sort" aria-label="Sort publications">
+          <option value="year-desc">Newest first</option>
+          <option value="year-asc">Oldest first</option>
+          <option value="title">Title A–Z</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="resultcount" id="count"></div>
+    <div id="list"></div>
+  </section>
+
+  <footer>
+    <div class="wrap foot">
+      <span>© 2026 Joseph M. Alisky, MD, PhD</span>
+      <span><a href="https://curingalzheimersdisease.com/" target="_blank" rel="noopener">Curing Alzheimer's Disease Foundation</a></span>
+      <span>Denver, Colorado</span>
+    </div>
+  </footer>
+
+  <script>
+    /* ---------- TABS ---------- */
+    const tabs = document.querySelectorAll('.tab');
+    const panels = document.querySelectorAll('.panel');
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        tabs.forEach((t) => t.setAttribute('aria-selected', 'false'));
+        panels.forEach((p) => p.classList.remove('active'));
+        tab.setAttribute('aria-selected', 'true');
+        document.getElementById(tab.dataset.panel).classList.add('active');
+      });
+    });
+
+    /* ---------- PUBLICATION DATA ----------
+       Source: PubMed export (Alisky J[au]), 57 records, verified author lists + DOIs.
+       Single source of truth. To add a paper, append an object with the same fields. */
+    const PUBS = [
+      {"title": "Mirtazapine associated with drug-related thrombocytopenia: a case report", "authors": "Stuhec M, Alisky J, Malesic I", "journal": "Journal of Clinical Psychopharmacology", "year": 2014, "pmid": "25118079", "doi": "10.1097/JCP.0000000000000201"},
+      {"title": "Mental status changes postchemoembolization: the role of inflammatory response", "authors": "Wells D, Alisky J, Ray CE Jr", "journal": "Seminars in Interventional Radiology", "year": 2013, "pmid": "24436540", "doi": "10.1055/s-0033-1342965"},
+      {"title": "Cerebroventricular clozapine would be a viable treatment modality for clozapine-dependent schizophrenia patients with neutropenia", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2012, "pmid": "22818272", "doi": "10.1016/j.mehy.2012.06.033"},
+      {"title": "Direct renal artery injection of cyclophosphamide and corticosteroids could offer a better means for treating transplant rejection and vasculitis", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2011, "pmid": "21044821", "doi": "10.1016/j.mehy.2010.10.018"},
+      {"title": "Dutasteride prevents the growth response to testosterone in benign and androgen-sensitive malignant prostate cells", "authors": "Alisky JM, Tang Y, Habermehl GK, Iczkowski KA", "journal": "International Journal of Clinical and Experimental Medicine", "year": 2010, "pmid": "20827322", "doi": null},
+      {"title": "Bovine and human-derived passive immunization could help slow a future avian influenza pandemic", "authors": "Alisky J", "journal": "Medical Hypotheses", "year": 2009, "pmid": "18824305", "doi": "10.1016/j.mehy.2008.08.016"},
+      {"title": "Minimally-responsive head injury survivors may have chronic catatonia reversed years after an accident", "authors": "Alisky JM", "journal": "Singapore Medical Journal", "year": 2009, "pmid": "19960172", "doi": null},
+      {"title": "Pregnancy outcomes for women with epilepsy and bipolar disorder could be improved with intraventricular or intrathecal medication administration", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2009, "pmid": "19556068", "doi": "10.1016/j.mehy.2009.05.024"},
+      {"title": "Coffee as an anti-parkinsonian agent: a case report", "authors": "Alisky J", "journal": "Journal of Alternative and Complementary Medicine", "year": 2008, "pmid": "18925864", "doi": "10.1089/acm.2008.0286"},
+      {"title": "Do not overlook polymyalgia rheumatica as a cause for immobility in poorly communicating dementia patients", "authors": "Alisky JM", "journal": "Southern Medical Journal", "year": 2008, "pmid": "19005443", "doi": "10.1097/SMJ.0b013e3181819f48"},
+      {"title": "Giant cell arteritis dementia and other steroid-responsive dementia syndromes are a unique opportunity for clinicians and researchers", "authors": "Alisky JM", "journal": "Singapore Medical Journal", "year": 2008, "pmid": "18363015", "doi": null},
+      {"title": "Intrathecal corticosteroids might slow Alzheimer's disease progression", "authors": "Alisky JM", "journal": "Neuropsychiatric Disease and Treatment", "year": 2008, "pmid": "19183775", "doi": "10.2147/ndt.s3685"},
+      {"title": "Normal pressure hydrocephalus co-existing with a second dementia disorder", "authors": "Alisky J", "journal": "Neuropsychiatric Disease and Treatment", "year": 2008, "pmid": "18728810", "doi": "10.2147/ndt.s2027"},
+      {"title": "Survival of Naegleria fowleri primary amebic meningocephalitis (PAM) could be improved with an intensive multi-route chemo- and biotherapeutic regimen", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2008, "pmid": "18715722", "doi": "10.1016/j.mehy.2008.06.037"},
+      {"title": "[Immobility in patients with advanced dementia may actually be a form of a Lorazepam-reversible catatonia]", "authors": "Alisky JM", "journal": "Revista Médica de Chile", "year": 2008, "pmid": "19194638", "doi": null},
+      {"title": "Doxycycline and rifampin could be useful therapeutic agents for Gaucher disease", "authors": "Alisky JM", "journal": "Molecular Genetics and Metabolism", "year": 2007, "pmid": "16919491", "doi": "10.1016/j.ymgme.2006.06.008"},
+      {"title": "Implantable central venous access ports for minimally invasive repetitive drainage of pleural effusions", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2007, "pmid": "17234354", "doi": "10.1016/j.mehy.2006.04.081"},
+      {"title": "Lorazepam-reversible catatonia in the elderly can mimic dementia, coma and stroke", "authors": "Alisky JM", "journal": "Age and Ageing", "year": 2007, "pmid": "17255087", "doi": "10.1093/ageing/afl168"},
+      {"title": "Memantine-induced decompensation in a patient with lewy body dementia", "authors": "Alisky JM", "journal": "Annals of the Academy of Medicine, Singapore", "year": 2007, "pmid": "17767347", "doi": null},
+      {"title": "Nightly high dose lactulose infusion could be a cost-effective treatment for hepatic encephalopathy, renal insufficiency and heart failure", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2007, "pmid": "17467192", "doi": "10.1016/j.mehy.2006.04.082"},
+      {"title": "Nogo A protein neutralisation and motor cortex computer implants: a future hope for spinal cord injury", "authors": "Alisky JM", "journal": "Singapore Medical Journal", "year": 2007, "pmid": "17538769", "doi": null},
+      {"title": "Phentermine, sibutramine and metformin could be used for the prevention and treatment of steroid-induced weight gain", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2007, "pmid": "17008024", "doi": "10.1016/j.mehy.2006.07.032"},
+      {"title": "Restless arm symptoms as an extension of restless leg syndrome", "authors": "Alisky JM", "journal": "Age and Ageing", "year": 2007, "pmid": "17114204", "doi": "10.1093/ageing/afl124"},
+      {"title": "Successful treatment of Parkinson disease with memantine", "authors": "Alisky JM", "journal": "Southern Medical Journal", "year": 2007, "pmid": "17591322", "doi": "10.1097/01.smj.0000257615.79559.3d"},
+      {"title": "The coming problem of HIV-associated Alzheimer's disease", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2007, "pmid": "17433562", "doi": "10.1016/j.mehy.2007.02.030"},
+      {"title": "Thiazolidinediones could be an effective treatment for HIV-associated progressive multifocal leukoencephalopathy", "authors": "Alisky JM", "journal": "International Journal of Infectious Diseases", "year": 2007, "pmid": "17236800", "doi": "10.1016/j.ijid.2006.09.012"},
+      {"title": "A TAT-modified fusion protein efficiently penetrates mouse hypoglossal nuclei from transduced ependyma", "authors": "Alisky JM, Xia H, Davidson BL", "journal": "Neuroscience Letters", "year": 2006, "pmid": "16650576", "doi": "10.1016/j.neulet.2006.03.076"},
+      {"title": "A new approach to Parkinson's disease combining caffeine, methylphenidate, and anticholinergic agents: case histories, pharmacological data, and a conceptual framework from traditional Chinese medicine", "authors": "Alisky JM", "journal": "Hong Kong Medical Journal", "year": 2006, "pmid": "16603789", "doi": null},
+      {"title": "Can chlorpheniramine cause serotonin syndrome?", "authors": "Alisky JM", "journal": "Singapore Medical Journal", "year": 2006, "pmid": "17075681", "doi": null},
+      {"title": "Cholinesterase inhibitors might alleviate methamphetamine-induced delusions, hallucinations and cognitive impairment, while reducing craving and addiction", "authors": "Alisky JM", "journal": "World Journal of Biological Psychiatry", "year": 2006, "pmid": "17071550", "doi": "10.1080/15622970600947030"},
+      {"title": "Dexamethasone could improve myocardial infarction outcomes and provide new therapeutic options for non-interventional patients", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2006, "pmid": "16503095", "doi": "10.1016/j.mehy.2005.12.034"},
+      {"title": "Drug interactions and pharmacogenetic reactions are the basis for chloroquine and mefloquine-induced psychosis", "authors": "Alisky JM, Chertkova EL, Iczkowski KA", "journal": "Medical Hypotheses", "year": 2006, "pmid": "16843615", "doi": "10.1016/j.mehy.2006.01.059"},
+      {"title": "Integrated electronic monitoring systems could revolutionize care for patients with cognitive impairment", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2006, "pmid": "16488550", "doi": "10.1016/j.mehy.2005.11.045"},
+      {"title": "Neurotransmitter depletion may be a cause of dementia pathology rather than an effect", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2006, "pmid": "16647220", "doi": "10.1016/j.mehy.2006.02.043"},
+      {"title": "Could cholinesterase inhibitors and memantine alleviate HIV dementia?", "authors": "Alisky JM", "journal": "Journal of Acquired Immune Deficiency Syndromes", "year": 2005, "pmid": "15608536", "doi": "10.1097/00126334-200501010-00021"},
+      {"title": "Niacin improved rigidity and bradykinesia in a Parkinson's disease patient but also caused unacceptable nightmares and skin rash--a case report", "authors": "Alisky JM", "journal": "Nutritional Neuroscience", "year": 2005, "pmid": "16669604", "doi": "10.1080/10284150500484638"},
+      {"title": "Gene transfer to brain and spinal cord using recombinant adenoviral vectors", "authors": "Alisky JM, Davidson BL", "journal": "Methods in Molecular Biology", "year": 2004, "pmid": "14970587", "doi": "10.1385/1-59259-650-9:91"},
+      {"title": "Is the immobility of advanced dementia a form of lorazepam-responsive catatonia?", "authors": "Alisky JM", "journal": "American Journal of Alzheimer's Disease & Other Dementias", "year": 2004, "pmid": "15359557", "doi": "10.1177/153331750401900404"},
+      {"title": "Towards therapy using RNA interference", "authors": "Alisky JM, Davidson BL", "journal": "American Journal of Pharmacogenomics", "year": 2004, "pmid": "14987121", "doi": "10.2165/00129785-200404010-00005"},
+      {"title": "Xenografts are an achievable breakthrough", "authors": "Alisky JM", "journal": "Medical Hypotheses", "year": 2004, "pmid": "15193356", "doi": "10.1016/j.mehy.2004.01.023"},
+      {"title": "A case history illustrating how extended release cholinesterase inhibitors could improve management of Alzheimer's disease", "authors": "Alisky JM", "journal": "Journal of Alzheimer's Disease", "year": 2003, "pmid": "14757938", "doi": "10.3233/jad-2003-5608"},
+      {"title": "Ethacrynic acid can be effective for refractory congestive heart failure and ascites", "authors": "Alisky JM, Tuttle TF", "journal": "Southern Medical Journal", "year": 2003, "pmid": "14632366", "doi": "10.1097/01.SMJ.0000082004.40613.D7"},
+      {"title": "Priapism induced by proton-pump inhibitors and misoprostol", "authors": "Alisky JM", "journal": "Annals of Internal Medicine", "year": 2003, "pmid": "14530253", "doi": "10.7326/0003-4819-139-7-200310070-00027-w2"},
+      {"title": "Transduction of neurons lining the cerebral external capsules in mice with feline immunodeficiency virus based vectors", "authors": "Alisky JM, Hughes SM, Davidson BL", "journal": "Neuroscience Letters", "year": 2003, "pmid": "14583396", "doi": "10.1016/s0304-3940(03)00833-4"},
+      {"title": "Viral-mediated delivery of the late-infantile neuronal ceroid lipofuscinosis gene, TPP-I to the mouse central nervous system", "authors": "Haskell RE, Hughes SM, Chiorini JA, Alisky JM, Davidson BL", "journal": "Gene Therapy", "year": 2003, "pmid": "12525835", "doi": "10.1038/sj.gt.3301843"},
+      {"title": "Widespread dispersal of cholera toxin subunit b to brain and spinal cord neurons following systemic delivery", "authors": "Alisky JM, van de Wetering CI, Davidson BL", "journal": "Experimental Neurology", "year": 2002, "pmid": "12460616", "doi": "10.1006/exnr.2002.8031"},
+      {"title": "Gene therapy for amyotrophic lateral sclerosis and other motor neuron diseases", "authors": "Alisky JM, Davidson BL", "journal": "Human Gene Therapy", "year": 2000, "pmid": "11096437", "doi": "10.1089/104303400750038435"},
+      {"title": "Transduction of murine cerebellar neurons with recombinant FIV and AAV5 vectors", "authors": "Alisky JM, Hughes SM, Sauter SL, Jolly D, Dubensky TW Jr, Staber PD, Chiorini JA, Davidson BL", "journal": "NeuroReport", "year": 2000, "pmid": "10976941", "doi": "10.1097/00001756-200008210-00013"},
+      {"title": "Bacteriophages show promise as antimicrobial agents", "authors": "Alisky J, Iczkowski K, Rapoport A, Troitsky N", "journal": "Journal of Infection", "year": 1998, "pmid": "9515662", "doi": "10.1016/s0163-4453(98)92874-2"},
+      {"title": "Isolated cavitary pulmonary Mycobacterium avium complex infection in a patient with AIDS", "authors": "Alisky JM, Schlesinger L", "journal": "Clinical Infectious Diseases", "year": 1998, "pmid": "9868684", "doi": "10.1086/517746"},
+      {"title": "Quantitative analysis of converging spinal and cuneate mossy fibre afferent projections to the rat cerebellar anterior lobe", "authors": "Alisky JM, Tolbert DL", "journal": "Neuroscience", "year": 1997, "pmid": "9284341", "doi": "10.1016/s0306-4522(97)00082-1"},
+      {"title": "Chronic NMDA receptor blockade or muscimol inhibition of cerebellar cortical neuronal activity alters the development of spinocerebellar afferent topography", "authors": "Tolbert DL, Pittman T, Alisky JM, Clark BR", "journal": "Developmental Brain Research", "year": 1994, "pmid": "7525115", "doi": "10.1016/0165-3806(94)90112-0"},
+      {"title": "Differential labeling of converging afferent pathways using biotinylated dextran amine and cholera toxin subunit B", "authors": "Alisky JM, Tolbert DL", "journal": "Journal of Neuroscience Methods", "year": 1994, "pmid": "7526082", "doi": "10.1016/0165-0270(94)90122-8"},
+      {"title": "Lower thoracic upper lumbar spinocerebellar projections in rats: a complex topography revealed in computer reconstructions of the unfolded anterior lobe", "authors": "Tolbert DL, Alisky JM, Clark BR", "journal": "Neuroscience", "year": 1993, "pmid": "7692349", "doi": "10.1016/0306-4522(93)90440-q"},
+      {"title": "The postnatal spatial and temporal development of corticospinal projections in cats", "authors": "Alisky JM, Swink TD, Tolbert DL", "journal": "Experimental Brain Research", "year": 1992, "pmid": "1374346", "doi": "10.1007/BF02259101"},
+      {"title": "Chronic fatigue syndrome", "authors": "Alisky JM, Iczkowski KA, Foti AA", "journal": "American Family Physician", "year": 1991, "pmid": "2058540", "doi": null},
+      {"title": "Barriers to housing for deinstitutionalized psychiatric patients", "authors": "Alisky JM, Iczkowski KA", "journal": "Hospital & Community Psychiatry", "year": 1990, "pmid": "2295488", "doi": "10.1176/ps.41.1.93"}
+    ];
+
+    /* ---------- RESEARCH UI ---------- */
+    const q = document.getElementById('q');
+    const list = document.getElementById('list');
+    const count = document.getElementById('count');
+    const sortSel = document.getElementById('sort');
+    const filtersEl = document.getElementById('filters');
+
+    let activeDecade = null;
+
+    const decades = [...new Set(PUBS.map((p) => Math.floor(p.year / 10) * 10))].sort((a, b) => b - a);
+    decades.forEach((d) => {
+      const b = document.createElement('button');
+      b.className = 'fchip';
+      b.textContent = d + 's';
+      b.dataset.decade = d;
+      b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => {
+        activeDecade = (activeDecade === d) ? null : d;
+        [...filtersEl.children].forEach((c) => c.setAttribute('aria-pressed', Number(c.dataset.decade) === activeDecade ? 'true' : 'false'));
+        render();
+      });
+      filtersEl.appendChild(b);
+    });
+
+    function linkFor(p) {
+      if (p.doi) return `https://doi.org/${p.doi}`;
+      if (p.pmid) return `https://pubmed.ncbi.nlm.nih.gov/${p.pmid}/`;
+      return `https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(p.title)}`;
+    }
+
+    function escapeHtml(s) { return s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+
+    function render() {
+      const term = q.value.trim().toLowerCase();
+      let rows = PUBS.filter((p) => {
+        if (activeDecade !== null && Math.floor(p.year / 10) * 10 !== activeDecade) return false;
+        if (!term) return true;
+        const hay = (p.title + ' ' + p.authors + ' ' + p.journal).toLowerCase();
+        return hay.includes(term);
+      });
+
+      const s = sortSel.value;
+      rows.sort((a, b) => {
+        if (s === 'title') return a.title.localeCompare(b.title);
+        const ay = a.year || (s === 'year-desc' ? -1 : 99999);
+        const by = b.year || (s === 'year-desc' ? -1 : 99999);
+        return s === 'year-asc' ? ay - by : by - ay;
+      });
+
+      count.textContent = `${rows.length} of ${PUBS.length} publications`;
+
+      if (!rows.length) { list.innerHTML = '<div class="noresults">No publications match that search.</div>'; return; }
+
+      list.innerHTML = rows.map((p) => `
+        <article class="pub">
+          <div class="pub-year${p.year ? '' : ' na'}">${p.year || '—'}</div>
+          <div>
+            <h3 class="pub-title">${escapeHtml(p.title)}</h3>
+            <p class="pub-meta">${escapeHtml(p.authors)}</p>
+            <span class="ptag" data-journal="${escapeHtml(p.journal)}">${escapeHtml(p.journal)}</span>
+          </div>
+          <a class="pub-link" href="${linkFor(p)}" target="_blank" rel="noopener">View →</a>
+        </article>
+      `).join('');
+
+      list.querySelectorAll('.ptag').forEach((el) => {
+        el.addEventListener('click', () => { q.value = el.dataset.journal; render(); document.getElementById('q').scrollIntoView({ behavior: 'smooth', block: 'center' }); });
+      });
+    }
+
+    q.addEventListener('input', render);
+    sortSel.addEventListener('change', render);
+    render();
+  </script>
+</body>
+</html>
