@@ -188,6 +188,10 @@
   .contact-card { background: var(--stone-raised); border: 1px solid var(--line); padding: 28px; align-self: start; }
   .contact-card .label { display: block; margin-bottom: 14px; }
   .contact-card p { margin: 0 0 8px; }
+  .contact-email { font-size: 1.12rem; }
+  .contact-email a { border-bottom: 1px solid var(--line); padding-bottom: 1px; transition: border-color 0.2s; }
+  .contact-email a:hover { border-color: var(--gold); }
+  .contact-loc { color: var(--ink-soft); }
   .placeholder { color: var(--ink-faint); font-style: italic; }
 
   /* ---- AFFILIATION ---- */
@@ -295,7 +299,7 @@
       <div class="about-text">
         <div class="sec-kicker">
           <h2 class="sec">A physician-scientist's practice</h2>
-          <span class="label">Director, Curing Alzheimer's Disease Foundation Scientific Board</span>
+          <span class="label">Director, CAD Foundation Scientific Board</span>
         </div>
 
         <div class="bio">
@@ -394,7 +398,7 @@
     </div>
 
     <div class="thread">
-      <p>It is rare to find, in a single physician, an <strong>MD-PhD neurobiologist</strong> with <strong>twenty-five years in geriatric medicine</strong> who also serves as <strong>Director of the Scientific Board of an Alzheimer's research foundation</strong> — a depth of clinical experience and scientific understanding to draw on when questions about memory and the aging brain arise.</p>
+      <p>It is rare to find, in a single physician, an <strong>MD-PhD neurobiologist</strong> with <strong>twenty-five years in geriatric medicine</strong> who also serves as <strong>Director of the Scientific Board of an Alzheimer's research foundation</strong> — a rare depth of clinical experience and scientific understanding to draw on when questions about memory and the aging brain arise.</p>
     </div>
 
     <div class="pillars">
@@ -433,10 +437,9 @@
       </div>
       <div class="contact-card" id="contact-block">
         <span class="label">Get in touch</span>
-        <p><span class="placeholder">[ Preferred contact ]</span></p>
-        <p><span class="placeholder">[ City, CO ]</span></p>
-        <p style="margin-top:14px;"><a href="mailto:placeholder@example.com">[ email ]</a></p>
-        <p style="margin-top:14px;" class="label">Informal inquiries welcome</p>
+        <p class="contact-email"><a href="mailto:alisky@aliskymd.com">alisky@aliskymd.com</a></p>
+        <p class="contact-loc">Aurora, Colorado</p>
+        <p style="margin-top:16px;" class="label">Email is the best way to reach him — informal inquiries welcome</p>
       </div>
     </div>
   </section>
@@ -473,7 +476,7 @@
     <div class="wrap foot">
       <span>© 2026 Joseph M. Alisky, MD, PhD</span>
       <span><a href="https://curingalzheimersdisease.com/" target="_blank" rel="noopener">Curing Alzheimer's Disease Foundation</a></span>
-      <span>Denver, Colorado</span>
+      <span>Aurora, Colorado</span>
     </div>
   </footer>
 
